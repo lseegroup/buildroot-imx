@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "start update time"
+count=0
+while (( count < 10 ))
+do
+	echo "test time server"
+	ping -c 1 time1.aliyun.com > /dev/null && ntpdate -u time1.aliyun.com > /dev/null
+	if [ $? = 0 ]; then
+		echo "update time ok exit"
+		exit 0
+	fi
+	(( count++ ))
+	sleep 10
+done
+echo "update failed"

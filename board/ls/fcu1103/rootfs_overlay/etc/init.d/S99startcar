@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Start/stop dhcpcd
+#
+
+DAEMON=/home/shantu/shantustart.sh
+
+[ -f $CONFIG ] || exit 0
+
+case "$1" in
+  start)
+	echo "Starting wpa_suppliacnt@wlan0 ..."
+	start-stop-daemon -S -x "$DAEMON" &
+	;;
+  stop)
+	echo "Stopping wpa_suppliant@wlan0..."
+	killall shantu2
+	;;
+  reload|force-reload)
+	;;
+  restart)
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop}"
+	exit 1
+esac

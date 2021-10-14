@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# sshd        Starts sshd.
+#
+
+# Make sure the ssh-keygen progam exists
+[ -f /bin/ntpdatauser ] || exit 0
+
+start() {
+	echo "start ntpdate user"
+	/bin/ntpdatauser &
+}
+
+
+case "$1" in
+  start)
+	start
+	;;
+  *)
+	echo "Usage: $0 {start}"
+	exit 1
+esac
+
+exit $?
+

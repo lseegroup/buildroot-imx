@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Start/stop dhcpcd
+#
+
+DAEMON=/home/shantu/shantustart.sh
+
+[ -f $CONFIG ] || exit 0
+
+case "$1" in
+  start)
+	echo "Init CAN0 "
+
+	ifconfig can0 down
+	ip link set can0 up type can bitrate 1000000 triple-sampling on
+	ifconfig can0 up
+
+	ifconfig can1 down
+	ip link set can1 up type can bitrate 1000000 triple-sampling on
+	ifconfig can1 up
+
+	;;
+  *)
+	echo "Usage: $0 {start}"
+	exit 1
+esac
